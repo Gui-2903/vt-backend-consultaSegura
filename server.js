@@ -51,5 +51,20 @@ app.post("/scan-file", upload.single("file"), async (req, res) => {
   }
 });
 
+// ANALYSIS (polling de resultado)
+app.get("/analysis/:id", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://www.virustotal.com/api/v3/analyses/${req.params.id}`,
+      {
+        headers: { "x-apikey": API_KEY }
+      }
+    );
+    res.json(response.data);
+  } catch (err) {
+    res.status(500).json(err.response?.data || err.message);
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("rodando..."));
