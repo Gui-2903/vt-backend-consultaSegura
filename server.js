@@ -66,5 +66,7 @@ app.get("/analysis/:id", async (req, res) => {
   }
 });
 
+console.log("API_KEY:", API_KEY);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("rodando..."));
