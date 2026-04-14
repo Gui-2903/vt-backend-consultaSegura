@@ -24,9 +24,13 @@ app.post("/scan-url", async (req, res) => {
         }
       }
     );
-
     res.json(response.data);
   } catch (err) {
+    // Log detalhado para debugar
+    console.error("Status:", err.response?.status);
+    console.error("Dados:", JSON.stringify(err.response?.data));
+    console.error("Mensagem:", err.message);
+    
     res.status(500).json(err.response?.data || err.message);
   }
 });
